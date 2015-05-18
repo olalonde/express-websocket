@@ -1,0 +1,30 @@
+{
+  "name": "express-websocket",
+  "version": "0.0.1",
+  "description": "Use express middleware before initiating websocket connection",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "^2.3.0",
+    "express": "^4.12.4",
+    "ws": "^0.7.2"
+  },
+  "devDependencies": {
+    "chai": "^2.3.0",
+    "express": "^4.12.4",
+    "mocha": "^2.2.5"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "websocket",
+    "express",
+    "connect",
+    "middleware"
+  ],
+  "author": "Olivier Lalonde <olalonde@gmail.com>",
+  "license": "MIT"
+}
