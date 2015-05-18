@@ -25,6 +25,7 @@
     "connect",
     "middleware"
   ],
+  "repository": "https://github.com/olalonde/express-websocket",
   "author": "Olivier Lalonde <olalonde@gmail.com>",
   "license": "MIT"
 }
