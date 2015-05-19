@@ -18,24 +18,34 @@ function mockServer (cb) {
     });
   });
 
+  app.use('/error', function (req, res, next) {
+    res.status(401);
+    res.json({ error: 'Unauthorized' });
+  });
+
   server.on('upgrade', handleUpgrade(app, wss));
 
   server.listen(3000, cb);
+  return server;
 }
 
 
 describe('express-websocket', function () {
-  var ws;
+  var ws, server, client;
 
   before(function (done) {
-    mockServer(done);
+    server = mockServer(done);
   });
 
-  before(function () {
-    ws = new wsocket('ws://localhost:3000/websocket');
+  it('should not open connection on /error', function (done) {
+    client = new wsocket('ws://localhost:3000/error');
+    client.on('error', function () {
+      done();
+    });
   });
 
   it('should open connection', function (done) {
+    ws = new wsocket('ws://localhost:3000/websocket');
     ws.on('open', done);
   });
   it('should receive hello', function (done) {
@@ -43,6 +53,15 @@ describe('express-websocket', function () {
       expect(msg).to.equal('hello');
       done();
     });
+  });
+  it('should close connection', function (done) {
+    ws.on('close', function (code, message) {
+      done();
+    });
+    ws.close();
+  });
+  it('should close server', function (done) {
+    server.close(done);
   });
 });
 

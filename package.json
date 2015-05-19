@@ -17,7 +17,7 @@
     "mocha": "^2.2.5"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --timeout=5000"
   },
   "keywords": [
     "websocket",

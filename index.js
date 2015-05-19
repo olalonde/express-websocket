@@ -11,6 +11,10 @@ module.exports = function (app, wss) {
     var res = new http.ServerResponse(req);
     res.assignSocket(socket);
 
+    res.on('finish', function () {
+      res.socket.destroy();
+    });
+
     res.websocket = function (cb) {
       var head = new Buffer(upgradeHead.length);
       upgradeHead.copy(head);
@@ -18,7 +22,7 @@ module.exports = function (app, wss) {
         //client.req = req; res.req
         wss.emit('connection'+req.url, client);
         wss.emit('connection', client);
-        cb(client);
+        if (cb) cb(client);
       });
     };
 
