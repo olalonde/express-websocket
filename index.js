@@ -11,13 +11,16 @@ module.exports = function (app, wss) {
     var res = new http.ServerResponse(req);
     res.assignSocket(socket);
 
+    // avoid hanging onto upgradeHead as this will keep the entire
+    // slab buffer used by node alive
+    var head = new Buffer(upgradeHead.length);
+    upgradeHead.copy(head);
+
     res.on('finish', function () {
       res.socket.destroy();
     });
 
     res.websocket = function (cb) {
-      var head = new Buffer(upgradeHead.length);
-      upgradeHead.copy(head);
       wss.handleUpgrade(req, socket, head, function (client) {
         //client.req = req; res.req
         wss.emit('connection'+req.url, client);
