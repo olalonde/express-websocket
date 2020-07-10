@@ -46,20 +46,26 @@ describe('express-websocket', function () {
 
   it('should open connection', function (done) {
     ws = new wsocket('ws://localhost:3000/websocket');
+    ws.on('message', saveMessage);
     ws.on('open', done);
   });
-  it('should receive hello', function (done) {
-    ws.on('message', function (msg) {
-      expect(msg).to.equal('hello');
-      done();
-    });
+
+  var message;
+  function saveMessage(receivedMessage) {
+    message = receivedMessage;
+  }
+
+  it('should receive hello', function () {
+    expect(message).to.equal('hello');
   });
+  
   it('should close connection', function (done) {
     ws.on('close', function (code, message) {
       done();
     });
     ws.close();
   });
+  
   it('should close server', function (done) {
     server.close(done);
   });

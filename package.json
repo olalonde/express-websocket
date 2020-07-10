@@ -1,20 +1,21 @@
 {
   "name": "express-websocket",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Use express middleware before initiating websocket connection",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
-    "chai": "^2.3.0",
-    "express": "^4.12.4",
-    "ws": "^0.7.2"
+    "ws": "^7"
   },
   "devDependencies": {
+    "express": "4.x",
     "chai": "^2.3.0",
-    "express": "^4.12.4",
     "mocha": "^2.2.5"
+  },
+  "peerDependencies": {
+    "express": "4.x"
   },
   "scripts": {
     "test": "mocha --timeout=5000"
