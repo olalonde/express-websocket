@@ -1,6 +1,6 @@
 {
   "name": "express-websocket",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Use express middleware before initiating websocket connection",
   "main": "index.js",
   "directories": {
