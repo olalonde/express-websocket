@@ -13,7 +13,7 @@ module.exports = function (app, wss) {
 
     // avoid hanging onto upgradeHead as this will keep the entire
     // slab buffer used by node alive
-    var head = new Buffer(upgradeHead.length);
+    var head = Buffer.alloc(upgradeHead.length);
     upgradeHead.copy(head);
 
     res.on('finish', function () {
