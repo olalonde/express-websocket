@@ -7,7 +7,7 @@
     "test": "test"
   },
   "dependencies": {
-    "ws": "^0.7.2"
+    "ws": "^7"
   },
   "devDependencies": {
     "express": "4.x",
